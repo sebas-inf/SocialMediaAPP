@@ -1,0 +1,9 @@
+Front End plans for Social media APP
+Need to make:
+Feed
+Direct Messaging
+Posts
+Security
+Payment system
+Data base for user information
+Log In system
