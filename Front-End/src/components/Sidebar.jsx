@@ -5,7 +5,7 @@ import {Link, Route, Routes} from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>Sidebar</div>
   )
 }
 
