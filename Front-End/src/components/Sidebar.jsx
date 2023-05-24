@@ -43,15 +43,15 @@ const Sidebar = ({ user, closeToggle }) => {
           </NavLink>
 
           <h3 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Flares</h3>
-          { flares.slice(0, flares.length - 1).map((category) => (
+          { flares.slice(0, flares.length - 1).map((flare) => (
             <NavLink
-              to={`/category/${category.name}`}
+              to={`/flare/${flare.name}`}
               className={({ isActive }) => ((isActive) ? isActiveStyle : isNotActiveStyle) }
               onClick={handleCloseSidebar}
-              key={category.name}
+              key={flare.name}
             >
-              <img src={category.image} className="w-8 h-8 rounded-full shadow-sm" alt={category.name} />
-              { category.name }
+              <img src={flare.image} className="w-8 h-8 rounded-full shadow-sm" alt={flare.name} />
+              { flare.name }
             </NavLink>
           )) }
 
