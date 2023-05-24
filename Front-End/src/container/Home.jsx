@@ -16,7 +16,7 @@ const Home = () => {
   const [user, setUser] = useState(null);
   const scrollRef = useRef(null);
 
-  useEffect(() => {Sid
+  useEffect(() => {
     const userInfo = getUserDataFromToken();
     if (userInfo) {
       const query = userQuery(userInfo.id);
