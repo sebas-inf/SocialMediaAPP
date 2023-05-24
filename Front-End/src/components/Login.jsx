@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
-
 import { client } from '../client';
+
 const Login = () => {
   const navigate = useNavigate(); 
   const responseGoogle = (response) =>{
@@ -43,7 +43,7 @@ const Login = () => {
 
           <div className="shadow-2xl">
             <GoogleLogin
-              clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
+              clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
               render={(renderProps) => (
                 <button
                   type="button"
@@ -51,10 +51,12 @@ const Login = () => {
                   onClick={renderProps.onClick}
                   disabled={renderProps.disabled}
                 >
-                  <FcGoogle className="mr-4" /> Sign in with google
+                  <FcGoogle className="mr-4" /> Sign in with Google
                 </button>
               )}
-              
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy="single_host_origin"
             />
           </div>
         </div>
