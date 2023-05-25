@@ -70,7 +70,7 @@ export const searchQuery = (searchTerm) => {
       userName,
       image
     },
-    save[] {
+    like[] {
       _key,
       postedBy -> {
         _id,
@@ -96,7 +96,7 @@ export const feedQuery = () => {
       userName,
       image
     },
-    save[] {
+    like[] {
       _key,
       postedBy -> {
         _id,
@@ -125,7 +125,7 @@ export const postDetailQuery = (postId) => {
       userName,
       image
     },
-   save[]{
+   like[]{
       postedBy->{
         _id,
         userName,
@@ -159,7 +159,7 @@ export const postDetailMorePostQuery = (post) => {
       userName,
       image
     },
-    save[]{
+    like[]{
       _key,
       postedBy->{
         _id,
@@ -185,7 +185,7 @@ export const userCreatedPostsQuery = (userId) => {
       userName,
       image
     },
-    save[]{
+    like[]{
       postedBy->{
         _id,
         userName,
@@ -197,7 +197,7 @@ export const userCreatedPostsQuery = (userId) => {
 };
 
 export const userLikedPostsQuery = (userId) => {
-  const query = `*[_type == 'post' && '${userId}' in save[].userId ] | order(_createdAt desc) {
+  const query = `*[_type == 'post' && '${userId}' in like[].userId ] | order(_createdAt desc) {
     image{
       asset->{
         url
@@ -210,7 +210,7 @@ export const userLikedPostsQuery = (userId) => {
       userName,
       image
     },
-    save[]{
+    like[]{
       postedBy->{
         _id,
         userName,
