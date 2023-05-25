@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { AiTwotoneDelete } from 'react-icons/ai';
-import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
 import { client, urlFor } from '../client'
 import { getUserDataFromToken } from '../utils';
@@ -15,7 +14,7 @@ const Post = ({post}) => {
 
   const navigate = useNavigate();
 
-  const { postedBy, image, _id, destination, like } = post;
+  const { postedBy, image, _id, like } = post;
 
   useEffect(() => {
     const userInfo = getUserDataFromToken();
@@ -102,18 +101,6 @@ const Post = ({post}) => {
               )}
             </div>
             <div className=" flex justify-between items-center gap-2 w-full">
-              {destination?.slice(8).length > 0 ? (
-                <a
-                  href={destination}
-                  target="_blank"
-                  className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
-                  rel="noreferrer"
-                >
-                  {' '}
-                  <BsFillArrowUpRightCircleFill />
-                  {destination?.slice(8, 17)}...
-                </a>
-              ) : undefined}
               { (postedBy?._id === user?.id) ? (
                 <button
                   type="button"
@@ -121,14 +108,14 @@ const Post = ({post}) => {
                     e.stopPropagation();
                     deletePost(_id);
                   }}
-                  className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
+                  className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none left"
                 >
                   <AiTwotoneDelete />
                 </button>) : null}
             </div>
           </div>) : null}
       </div>
-      <Link to={`/user-profile/${postedBy?._id}`} className="flex-initial gap-2 mt-2 ml-2 items-center">
+      <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
         <img
           className="w-8 h-8 rounded-full object-cover"
           src={postedBy?.image}
