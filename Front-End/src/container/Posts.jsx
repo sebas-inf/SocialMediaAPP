@@ -15,7 +15,7 @@ const Posts = ({user}) => {
         <Routes>
           <Route path='/' element={<Feed />} />
           <Route path='/flare/:flareId' element={<Feed />} />
-          <Route path='/ppost-detail/:postId' element={<PostDetail user={ user } />} />
+          <Route path='/post-detail/:postId' element={<PostDetail user={ user } />} />
           <Route path='/create-post' element={<CreatePost user={ user } />} />
           <Route path='/search' element={<Search searchTerm={ searchTerm } setSearchTerm={ setSearchTerm } />} />
         </Routes>

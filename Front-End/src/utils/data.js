@@ -57,7 +57,7 @@ export const userQuery = (userId) => {
 };
 
 export const searchQuery = (searchTerm) => {
-  const query = `*[_type == "post" && title match '${searchTerm}*' || flare match '${searchTerm}*' || about match '${searchTerm}*']{
+  const query = `*[_type == "post" && title match '${searchTerm}*' || flare match '${searchTerm}*' || caption match '${searchTerm}*']{
     image {
       asset -> {
         url
@@ -117,7 +117,7 @@ export const postDetailQuery = (postId) => {
     },
     _id,
     title, 
-    about,
+    caption,
     flare,
     destination,
     postedBy->{
