@@ -127,7 +127,7 @@ const PostDetail = ({user}) => {
       </div>
       {posts?.length > 0 && (
         <h2 className="text-center font-bold text-2xl mt-8 mb-4">
-          You may also like these posts
+          You may also like
         </h2>
       )}
       {posts ? (
@@ -139,4 +139,4 @@ const PostDetail = ({user}) => {
   );
 };
 
-export default PostDetail
+export default PostDetail;
