@@ -86,7 +86,7 @@ const Post = ({post}) => {
               </div>
               {alreadyLiked ? (
                 <button type="button" className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none cursor-zoom-in">
-                  {like?.length} Liked
+                  {post?.like?.length} ♥
                 </button>
               ) : (
                 <button
@@ -97,7 +97,7 @@ const Post = ({post}) => {
                   type="button"
                   className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                 >
-                  {like?.length} {likingPost ? 'Liking' : 'Like'}
+                  {post?.like?.length} {likingPost ? 'Liking' : 'Like'}
                 </button>
               )}
             </div>
@@ -128,7 +128,7 @@ const Post = ({post}) => {
             </div>
           </div>) : null}
       </div>
-      <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 ml-2 items-center">
+      <Link to={`/user-profile/${postedBy?._id}`} className="flex-initial gap-2 mt-2 ml-2 items-center">
         <img
           className="w-8 h-8 rounded-full object-cover"
           src={postedBy?.image}
