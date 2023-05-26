@@ -172,7 +172,7 @@ export const postDetailMorePostQuery = (post) => {
 };
 
 export const userCreatedPostsQuery = (userId) => {
-  const query = `*[ _type == 'Post' && userId == '${userId}'] | order(_createdAt desc){
+  const query = `*[ _type == 'post' && userId == '${userId}'] | order(_createdAt desc){
     image{
       asset->{
         url
@@ -185,7 +185,7 @@ export const userCreatedPostsQuery = (userId) => {
       userName,
       image
     },
-    like[]{
+    save[]{
       postedBy->{
         _id,
         userName,

@@ -53,6 +53,7 @@ const UserProfile = () => {
   if (!user) {
     return <Spinner message={'Loading profile...'} />;
   }
+
   return (
     <div className='relative pb-2 h-full justify-center items-center'>
       <div className='flex flex-col pb-5'>
@@ -96,9 +97,9 @@ const UserProfile = () => {
               type='button'
               onClick={(e) => {
                 setText(e.target.textContent);
-                setActiveBtn('saved');
+                setActiveBtn('liked');
               }}
-              className={`${(activeBtn === 'saved') ? activeBtnStyles : notActiveBtnStyles }`}
+              className={`${(activeBtn === 'liked') ? activeBtnStyles : notActiveBtnStyles }`}
             >
               Liked
             </button>
@@ -118,4 +119,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile
+export default UserProfile;
