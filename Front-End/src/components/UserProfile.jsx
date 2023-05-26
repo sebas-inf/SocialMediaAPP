@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useParams, useNavigate } from 'react-router-dom';
 import { googleLogout } from '@react-oauth/google';
+import {PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js"
 
 import { userCreatedPostsQuery, userQuery, userLikedPostsQuery } from '../utils/data';
 import { client } from '../client';
@@ -11,6 +12,38 @@ import Spinner from './Spinner';
 const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,technology';
 const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
 const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
+
+const ButtonWrapper = ({ type }) => {
+	const [{ options }, dispatch] = usePayPalScriptReducer();
+
+	useEffect(() => {
+        dispatch({
+            type: "resetOptions",
+            value: {
+                ...options,
+                intent: "subscription",
+            },
+        });
+    }, [type]);
+
+	return (<PayPalButtons
+		createSubscription={(data, actions) => {
+			return actions.subscription
+				.create({
+					plan_id: "P-3RX065706M3469222L5IFM4I",
+				})
+				.then((orderId) => {
+					// Your code here after create the order
+					return orderId;
+				});
+		}}
+		style={{
+			label: "subscribe",
+		}}
+	/>);
+}
+
+
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
@@ -103,6 +136,18 @@ const UserProfile = () => {
             >
               Liked
             </button>
+          </div>
+          <div className='text-right mb-7'>
+          <PayPalScriptProvider
+            options={{
+              "client-id": process.env.REACT_PAYPAL_CLIENT_ID,
+              components: "buttons",
+              intent: "subscription",
+              vault: true,
+            }}
+          >
+            <ButtonWrapper type="subscription" />
+          </PayPalScriptProvider>
           </div>
           { posts?.length ? (
             <div className='px-2'>
