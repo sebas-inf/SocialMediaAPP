@@ -25,6 +25,7 @@ const ButtonWrapper = ({ type }) => {
             },
         });
     }, [type]);
+    
 
 	return (<PayPalButtons
 		createSubscription={(data, actions) => {
@@ -38,11 +39,14 @@ const ButtonWrapper = ({ type }) => {
 				});
 		}}
 		style={{
+      layout:"horizontal",
 			label: "subscribe",
+      color: "white",
+      shape: "pill",
+      tagline: "false"
 		}}
 	/>);
 }
-
 
 
 const UserProfile = () => {
@@ -137,10 +141,10 @@ const UserProfile = () => {
               Liked
             </button>
           </div>
-          <div className='text-right mb-7'>
+          <div className='absolute right-5 top-12' style={{ maxWidth: "200px", minHeight: "200px" }} >
           <PayPalScriptProvider
             options={{
-              "client-id": process.env.REACT_PAYPAL_CLIENT_ID,
+              "client-id": "test",
               components: "buttons",
               intent: "subscription",
               vault: true,
