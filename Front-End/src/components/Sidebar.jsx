@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { RiHomeFill } from 'react-icons/ri';
+import { RiHomeFill, RiInboxFill } from 'react-icons/ri';
 import { IoIosArrowForward } from 'react-icons/io';
 
 import logo from '../assets/logo.png';
@@ -39,7 +39,14 @@ const Sidebar = ({ user, closeToggle }) => {
           >
 
             <RiHomeFill /> Home
-
+          </NavLink>
+          <NavLink
+            to='/direct-messaging'
+            className={({ isActive }) => ((isActive) ? isActiveStyle : isNotActiveStyle) }
+            onClick={handleCloseSidebar}
+            end
+          >
+            <RiInboxFill/> Inbox
           </NavLink>
 
           <h3 className='mt-2 px-5 text-base 2xl:text-xl'>Discover Flares</h3>

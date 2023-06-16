@@ -4,6 +4,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Login from "./components/Login";
 import Home from "./container/Home";
 import { getUserDataFromToken } from './utils';
+import DM from './container/DM';
 
 const App = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const App = () => {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="/*" element={<Home />} />
+        <Route path="direct-messaging" element={<DM />} />
       </Routes>
     </GoogleOAuthProvider>
   );
