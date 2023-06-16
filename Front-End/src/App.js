@@ -5,7 +5,6 @@ import Login from "./components/Login";
 import Home from "./container/Home";
 import { getUserDataFromToken } from './utils';
 import DM from './container/DM';
-import {ChatEngine} from 'react-chat-engine'; 
 
 const App = () => {
   const navigate = useNavigate();
