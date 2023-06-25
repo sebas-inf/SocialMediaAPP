@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { ChatEngine } from "react-chat-engine";
+import { ChatEngine } from 'react-chat-engine';
 import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
@@ -28,57 +28,61 @@ const DM = () => {
           setUser(data[0]);
         });
       }
-      return () => {
-        setUser(null);
-      };
     }, []);
   
     const getFile = async (url) => {
       const response = await fetch(url);
       const data = await response.blob();
   
-      return new File([data], user?.image, { type: "image/jpeg" });
+      return new File([data], user?.imageUrl, { type: "image/jpeg" });
     };
   
-    useEffect(() => {
-      
-      const loadData = async () => {
-        try {
-          let res = await axios.get("https://api.chatengine.io/users/me", {
-            headers: {
-              "project-id": process.env.REACT_APP_CHAT_ENGINE_ID,
-              "user-name": user?.userName,
-            },
-          });
-          setLoading(false);
-          console.log("Response", res);
-        } catch (error) {
-          let formdata = new FormData();
-          formdata.append("username", user?.userName);
-  
-          await getFile(user?.image).then(async (avatar) => {
-            formdata.append("avatar", avatar, avatar.name);
-  
-            await axios
-              .post("https://api.chatengine.io/users", formdata, {
-                headers: {
-                  "private-key": process.env.REACT_APP_CHAT_ENGINE_KEY,
-                },
-              })
-              .then(() => {
-                setLoading(false);
-                console.log("success here");
-              })
-              .catch((error) => console.log(error));
-          });
-          console.log(error);
-        }
-      };
-  
-      loadData();
-    }, [user, history]);
-  
     
+
+    useEffect(() => {
+
+      if(!user || user === null){
+        history("/")
+
+        return
+      }
+
+      axios.get( 
+          'https://api.chatengine.io/users/me/', 
+          { headers: {
+              "project-id": process.env.REACT_APP_CHAT_ENGINE_ID,
+              "user-name": user?.email,
+              "user-secret": user?._id
+          }}
+      
+      )
+      .then(() => {setLoading(false);
+
+      })
+      .catch(e => {
+          let formdata = new FormData()
+          formdata.append("email", user?.email)
+          formdata.append("username", user?.name)
+          formdata.append("secret", user?.id)
+
+          getFile(user?.image)
+              .then((avatar) => {
+                  formdata.append("avatar", avatar, avatar.name)
+
+                  axios.post(
+                      "https://api.chatengine.io/users",
+                      formdata,
+                      {headers: {"private-key": process.env.REACT_APP_CHAT_ENGINE_KEY}}
+                  )
+
+                  .then(() => setLoading(false))
+                  .catch(e => console.log("e", e.response))
+              })
+      })
+
+    }, [user, history]);
+
+    if (!user || loading) return
   
     return (
       <div className='flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out'>
@@ -119,13 +123,15 @@ const DM = () => {
           </Routes>
   
         </div>
-        <div>
-          <ChatEngine
-          height="calc(100vh - 66px)"
-          projectID={process.env.REACT_APP_CHAT_ENGINE_ID}
-          userName={user?.userName}
-          />
-        </div>
+        
+          <ChatEngine 
+                height="calc(100vh - 66px)"
+                width = ""
+                projectID= {process.env.REACT_APP_CHAT_ENGINE_ID}
+                userName={user?.name}
+                userSecret={user?.email}
+            />
+        
         
       </div>
     );
