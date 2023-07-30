@@ -22,7 +22,6 @@ const App = () => {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="/*" element={<Home />} />
-        <Route path="direct-messaging" element={<DM />} />
       </Routes>
     </GoogleOAuthProvider>
   );
